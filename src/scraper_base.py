@@ -8,7 +8,6 @@ import logging
 from typing import Optional, Dict, Any
 from abc import ABC, abstractmethod
 import requests
-from fake_useragent import UserAgent
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -34,7 +33,6 @@ class BaseScraper(ABC):
         self.max_retries = max_retries
         self.logger = logging.getLogger(self.__class__.__name__)
         self.session = self._create_session()
-        self.ua = UserAgent()
         self.last_request_time = 0
         
     def _create_session(self) -> requests.Session:
@@ -56,9 +54,9 @@ class BaseScraper(ABC):
         return session
     
     def _get_headers(self) -> Dict[str, str]:
-        """Generate headers with rotating user agent."""
+        """Generate headers with user agent."""
         return {
-            'User-Agent': self.ua.random,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'en-US,en;q=0.5',
             'Accept-Encoding': 'gzip, deflate',
