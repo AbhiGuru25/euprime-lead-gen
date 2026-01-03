@@ -8,11 +8,11 @@ This tool identifies, enriches, and ranks qualified leads for 3D in-vitro models
 
 ## Features
 
-- 🔍 **Multi-Source Data Collection**: Scrapes PubMed, LinkedIn, funding databases, and conference listings
-- 🎯 **AI-Powered Scoring**: Weighted scoring algorithm (0-100 scale) based on 5 key criteria
-- 📊 **Interactive Dashboard**: Streamlit-based UI with search, filter, and export capabilities
-- 📈 **Analytics**: Visual insights into lead distribution and scoring patterns
-- 📥 **Export**: Download filtered results as CSV for CRM integration
+-  **Multi-Source Data Collection**: Scrapes PubMed, LinkedIn, funding databases, and conference listings
+-  **AI-Powered Scoring**: Weighted scoring algorithm (0-100 scale) based on 5 key criteria
+-  **Interactive Dashboard**: Streamlit-based UI with search, filter, and export capabilities
+-  **Analytics**: Visual insights into lead distribution and scoring patterns
+-  **Export**: Download filtered results as CSV for CRM integration
 
 ## Scoring System
 
@@ -206,7 +206,7 @@ This implementation includes:
 
 For questions, feedback, or demo requests:
 
-**Email**: akash@euprime.org
+**Email**: abhivirani2556@gmail.com
 
 ---
 
