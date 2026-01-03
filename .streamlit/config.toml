@@ -1,6 +1,5 @@
 [server]
 headless = true
-port = $PORT
 enableCORS = false
 enableXsrfProtection = false
 
@@ -9,7 +8,7 @@ serverAddress = "0.0.0.0"
 gatherUsageStats = false
 
 [theme]
-primaryColor = "#1f77b4"
+primaryColor = "#667eea"
 backgroundColor = "#ffffff"
-secondaryBackgroundColor = "#f0f2f6"
+secondaryBackgroundColor = "#f8fafc"
 textColor = "#262730"

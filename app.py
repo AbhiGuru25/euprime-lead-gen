@@ -1,6 +1,6 @@
 """
 EuPrime AI Lead Generation Dashboard
-Streamlit application for searching, filtering, and exporting qualified leads.
+Modern, user-friendly interface for lead generation and scoring.
 """
 
 import streamlit as st
@@ -13,42 +13,146 @@ import os
 
 # Page configuration
 st.set_page_config(
-    page_title="EuPrime Lead Generation Tool",
+    page_title="EuPrime Lead Generation | AI-Powered Lead Scoring",
     page_icon="🎯",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Enhanced Custom CSS for modern, premium look
 st.markdown("""
     <style>
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    /* Global Styles */
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Main Header with Gradient */
     .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #1f77b4;
+        font-size: 3rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-bottom: 0.5rem;
+        text-align: center;
     }
+    
     .sub-header {
-        font-size: 1.2rem;
-        color: #666;
+        font-size: 1.3rem;
+        color: #64748b;
         margin-bottom: 2rem;
+        text-align: center;
+        font-weight: 500;
     }
+    
+    /* Metric Cards with Gradient Backgrounds */
     .metric-card {
-        background-color: #f0f2f6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Score Badges with Modern Design */
+    .score-badge {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .score-high { 
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    .score-medium { 
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+    .score-low { 
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+    
+    /* Sidebar Styling */
+    .css-1d391kg {
+        background-color: #f8fafc;
+    }
+    
+    /* Button Styling */
+    .stButton>button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .stButton>button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Tab Styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2rem;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+    }
+    
+    /* Card Container */
+    .info-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 1rem;
+        border-left: 4px solid #667eea;
+    }
+    
+    /* Data Table Styling */
+    .dataframe {
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+    
+    /* Success Message */
+    .success-message {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
         padding: 1rem;
         border-radius: 0.5rem;
         text-align: center;
+        font-weight: 600;
+        margin: 1rem 0;
     }
-    .score-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
-        font-weight: bold;
-        color: white;
+    
+    /* Feature Highlight */
+    .feature-box {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-left: 4px solid #0ea5e9;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
     }
-    .score-high { background-color: #28a745; }
-    .score-medium { background-color: #ffc107; color: #000; }
-    .score-low { background-color: #dc3545; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -79,52 +183,103 @@ def get_score_badge(score):
 def main():
     """Main application function."""
     
-    # Header
-    st.markdown('<div class="main-header">🎯 EuPrime AI Lead Generation Tool</div>', unsafe_allow_html=True)
+    # Clean Professional Header
+    st.markdown('<div class="main-header">EuPrime Lead Generation</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">AI-Powered Lead Scoring for 3D In-Vitro Models</div>', unsafe_allow_html=True)
     
-    # Load data
-    with st.spinner("Loading lead data..."):
+    # Feature Highlight Banner
+    st.markdown("""
+        <div class="feature-box">
+            <strong>Smart Lead Prioritization</strong> • Find the most qualified prospects for your 3D in-vitro models 
+            using AI-powered scoring across 5 key criteria
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Load data with progress
+    with st.spinner("Loading lead intelligence..."):
         df = load_and_process_data()
     
-    # Sidebar filters
-    st.sidebar.header("🔍 Filters")
-    
-    # Score filter
-    min_score = st.sidebar.slider(
-        "Minimum Propensity Score",
-        min_value=0,
-        max_value=100,
-        value=0,
-        step=5
-    )
-    
-    # Location filter
-    all_locations = sorted(df['person_location'].dropna().unique().tolist())
-    selected_locations = st.sidebar.multiselect(
-        "Location",
-        options=all_locations,
-        default=[]
-    )
-    
-    # Company filter
-    all_companies = sorted(df['company'].dropna().unique().tolist())
-    selected_companies = st.sidebar.multiselect(
-        "Company",
-        options=all_companies,
-        default=[]
-    )
-    
-    # Biotech hub filter
-    all_hubs = sorted(df['biotech_hub'].dropna().unique().tolist())
-    selected_hubs = st.sidebar.multiselect(
-        "Biotech Hub",
-        options=all_hubs,
-        default=[]
-    )
-    
-    # Search box
-    search_query = st.sidebar.text_input("🔎 Search (Name, Title, Company)")
+    # Enhanced Sidebar with Better Organization
+    with st.sidebar:
+        st.markdown("### Filters & Search")
+        st.markdown("---")
+        
+        # Quick Stats in Sidebar
+        st.markdown("#### Quick Stats")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Total Leads", len(df), delta=None)
+        with col2:
+            high_quality = len(df[df['score_total'] >= 80])
+            st.metric("High Quality", high_quality, delta=None)
+        
+        st.markdown("---")
+        
+        # Search box (moved to top for better UX)
+        st.markdown("#### Search")
+        search_query = st.text_input(
+            "Search leads...",
+            placeholder="Name, Title, or Company",
+            label_visibility="collapsed"
+        )
+        
+        st.markdown("---")
+        
+        # Score filter with indicator
+        st.markdown("#### Score Filter")
+        min_score = st.slider(
+            "Minimum Propensity Score",
+            min_value=0,
+            max_value=100,
+            value=0,
+            step=5,
+            help="Filter leads by their propensity-to-buy score"
+        )
+        
+        # Show score range indicator
+        if min_score >= 80:
+            st.success("High-value leads only")
+        elif min_score >= 50:
+            st.info("Medium to high-value leads")
+        else:
+            st.info("All leads")
+        
+        st.markdown("---")
+        
+        # Advanced Filters (collapsible)
+        with st.expander("Advanced Filters", expanded=False):
+            # Location filter
+            all_locations = sorted(df['person_location'].dropna().unique().tolist())
+            selected_locations = st.multiselect(
+                "Location",
+                options=all_locations,
+                default=[],
+                help="Filter by person's location"
+            )
+            
+            # Company filter
+            all_companies = sorted(df['company'].dropna().unique().tolist())
+            selected_companies = st.multiselect(
+                "Company",
+                options=all_companies,
+                default=[],
+                help="Filter by company name"
+            )
+            
+            # Biotech hub filter
+            all_hubs = sorted(df['biotech_hub'].dropna().unique().tolist())
+            selected_hubs = st.multiselect(
+                "Biotech Hub",
+                options=all_hubs,
+                default=[],
+                help="Filter by major biotech hubs"
+            )
+        
+        st.markdown("---")
+        
+        # Reset filters button
+        if st.button("Reset All Filters", use_container_width=True):
+            st.rerun()
     
     # Apply filters
     filtered_df = df[df['score_total'] >= min_score].copy()
@@ -149,42 +304,77 @@ def main():
     # Reset rank after filtering
     filtered_df['rank'] = range(1, len(filtered_df) + 1)
     
-    # Metrics
+    # Enhanced Metrics with Gradient Cards
+    st.markdown("### Lead Intelligence Overview")
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("Total Leads", len(df))
+        st.markdown("""
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                        padding: 1.5rem; border-radius: 1rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Total Leads</div>
+            </div>
+        """.format(len(df)), unsafe_allow_html=True)
     
     with col2:
-        st.metric("Filtered Leads", len(filtered_df))
+        st.markdown("""
+            <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+                        padding: 1.5rem; border-radius: 1rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Filtered Results</div>
+            </div>
+        """.format(len(filtered_df)), unsafe_allow_html=True)
     
     with col3:
         avg_score = filtered_df['score_total'].mean() if len(filtered_df) > 0 else 0
-        st.metric("Avg Score", f"{avg_score:.1f}")
+        st.markdown("""
+            <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); 
+                        padding: 1.5rem; border-radius: 1rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{:.1f}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Average Score</div>
+            </div>
+        """.format(avg_score), unsafe_allow_html=True)
     
     with col4:
         high_quality = len(filtered_df[filtered_df['score_total'] >= 80])
-        st.metric("High Quality (≥80)", high_quality)
+        st.markdown("""
+            <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
+                        padding: 1.5rem; border-radius: 1rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">High Quality (≥80)</div>
+            </div>
+        """.format(high_quality), unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # Tabs
-    tab1, tab2, tab3 = st.tabs(["📊 Lead Table", "📈 Analytics", "ℹ️ About"])
+    tab1, tab2, tab3 = st.tabs(["Lead Table", "Analytics", "About"])
     
     with tab1:
-        st.subheader("Lead Generation Dashboard")
+        st.markdown("### Qualified Leads Dashboard")
         
-        # Export button
-        col1, col2 = st.columns([6, 1])
+        # Export button with better styling
+        col1, col2, col3 = st.columns([5, 1, 1])
         with col2:
-            csv = filtered_df.to_csv(index=False)
-            st.download_button(
-                label="📥 Export CSV",
-                data=csv,
-                file_name="euprime_leads.csv",
-                mime="text/csv"
-            )
+            if len(filtered_df) > 0:
+                csv = filtered_df.to_csv(index=False)
+                st.download_button(
+                    label="Export CSV",
+                    data=csv,
+                    file_name="euprime_leads.csv",
+                    mime="text/csv",
+                    use_container_width=True
+                )
+        with col3:
+            st.markdown(f"**{len(filtered_df)}** leads")
         
         # Display table
         if len(filtered_df) > 0:
+            # Info message
+            if len(filtered_df) != len(df):
+                st.info(f"Showing {len(filtered_df)} of {len(df)} total leads based on your filters")
+            
             # Prepare display dataframe
             display_df = filtered_df[[
                 'rank', 'score_total', 'name', 'title', 'company',
@@ -200,8 +390,13 @@ def main():
             st.dataframe(
                 display_df,
                 use_container_width=True,
-                height=600,
+                height=500,
                 column_config={
+                    "Rank": st.column_config.NumberColumn(
+                        "Rank",
+                        help="Lead ranking based on score",
+                        format="%d"
+                    ),
                     "Score": st.column_config.ProgressColumn(
                         "Score",
                         help="Propensity to Buy Score (0-100)",
@@ -213,7 +408,8 @@ def main():
                         "Email",
                         help="Business email address"
                     )
-                }
+                },
+                hide_index=True
             )
             
             # Detailed view expander
