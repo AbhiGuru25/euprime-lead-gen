@@ -278,7 +278,7 @@ def main():
         st.markdown("---")
         
         # Reset filters button
-        if st.button("Reset All Filters", use_container_width=True):
+        if st.button("Reset All Filters"):
             st.rerun()
     
     # Apply filters
@@ -363,8 +363,7 @@ def main():
                     label="Export CSV",
                     data=csv,
                     file_name="euprime_leads.csv",
-                    mime="text/csv",
-                    use_container_width=True
+                    mime="text/csv"
                 )
         with col3:
             st.markdown(f"**{len(filtered_df)}** leads")
