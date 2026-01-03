@@ -1,0 +1,72 @@
+# EuPrime Lead Generation Tool Configuration
+
+# Search Keywords
+keywords:
+  job_titles:
+    - "Director of Toxicology"
+    - "Head of Preclinical Safety"
+    - "VP Preclinical"
+    - "Head of Safety Assessment"
+    - "Director Safety Pharmacology"
+    - "Toxicology Lead"
+    - "Safety Assessment Manager"
+  
+  scientific_terms:
+    - "DILI"
+    - "Drug-Induced Liver Injury"
+    - "3D cell culture"
+    - "Organ-on-chip"
+    - "Hepatic spheroids"
+    - "Investigative Toxicology"
+    - "in vitro models"
+    - "liver toxicity"
+
+# Scoring Weights (Total = 115, normalized to 100)
+scoring:
+  role_fit: 30
+  company_intent: 20
+  technographic: 15
+  location: 10
+  scientific_intent: 40
+
+# Biotech Hubs for Location Scoring
+biotech_hubs:
+  - "Boston"
+  - "Cambridge, MA"
+  - "San Francisco"
+  - "Bay Area"
+  - "South San Francisco"
+  - "Basel"
+  - "Cambridge, UK"
+  - "Oxford"
+  - "London"
+  - "San Diego"
+  - "Research Triangle Park"
+
+# Rate Limiting (seconds between requests)
+rate_limiting:
+  default_delay: 2
+  pubmed_delay: 0.5
+  linkedin_delay: 5
+
+# PubMed Settings
+pubmed:
+  max_results: 100
+  months_back: 24
+  email: "your-email@example.com"  # Required by NCBI
+
+# Conference Sources
+conferences:
+  - name: "SOT"
+    url: "https://www.toxicology.org"
+  - name: "AACR"
+    url: "https://www.aacr.org"
+  - name: "ISSX"
+    url: "https://www.issx.org"
+
+# Email Pattern Templates
+email_patterns:
+  - "{first}.{last}@{domain}"
+  - "{first}{last}@{domain}"
+  - "{first_initial}{last}@{domain}"
+  - "{first}_{last}@{domain}"
