@@ -2,6 +2,10 @@
 
 AI-powered lead generation and scoring system for EuPrime's 3D in-vitro models business.
 
+## Live Demo
+
+Web Link: https://euprime-lead-gen-4wd98daho5hj88qbrncedt.streamlit.app/
+
 ## Overview
 
 This tool identifies, enriches, and ranks qualified leads for 3D in-vitro models used in drug therapy research. It uses a sophisticated **Propensity-to-Buy Scoring System** that analyzes multiple data sources to prioritize the most promising prospects.
